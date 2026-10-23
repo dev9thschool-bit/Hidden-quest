@@ -1,204 +1,151 @@
-# Hidden-quest
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Roborace Announcement</title>
+    <title>RoboRace Result</title>
 
-<style>
-    * {
-        box-sizing: border-box;
-        margin: 0;
-        padding: 0;
-    }
-
-    body {
-        min-height: 100vh;
-        font-family: Arial, Helvetica, sans-serif;
-        background:
-            radial-gradient(circle at top, #263238, #080b0d 65%);
-        color: white;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        overflow: hidden;
-    }
-
-    .container {
-        width: min(92%, 700px);
-        text-align: center;
-        position: relative;
-        z-index: 2;
-    }
-
-    .robot {
-        font-size: 80px;
-        animation: float 2s ease-in-out infinite;
-        margin-bottom: 25px;
-    }
-
-    @keyframes float {
-        0%, 100% { transform: translateY(0); }
-        50% { transform: translateY(-12px); }
-    }
-
-    .intro {
-        font-size: clamp(20px, 5vw, 32px);
-        color: #b0bec5;
-        margin-bottom: 30px;
-    }
-
-    button {
-        border: none;
-        padding: 16px 32px;
-        border-radius: 50px;
-        font-size: 18px;
-        font-weight: bold;
-        cursor: pointer;
-        background: white;
-        color: #111;
-        box-shadow: 0 0 25px rgba(255,255,255,.25);
-        transition: .25s;
-    }
-
-    button:hover {
-        transform: scale(1.07);
-        box-shadow: 0 0 35px rgba(255,255,255,.5);
-    }
-
-    .reveal {
-        display: none;
-        animation: reveal .8s ease forwards;
-    }
-
-    @keyframes reveal {
-        from {
-            opacity: 0;
-            transform: scale(.7);
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            min-height: 100%;
         }
-        to {
-            opacity: 1;
-            transform: scale(1);
+
+        body {
+            background: #111827;
+            color: white;
+            font-family: Arial, sans-serif;
+            text-align: center;
         }
-    }
 
-    .small {
-        color: #cfd8dc;
-        font-size: 18px;
-        margin-bottom: 12px;
-    }
-
-    .third {
-        font-size: clamp(70px, 18vw, 150px);
-        font-weight: 900;
-        line-height: .9;
-        color: #cd7f32;
-        text-shadow:
-            0 0 15px rgba(205,127,50,.5),
-            0 0 40px rgba(205,127,50,.25);
-    }
-
-    .prize {
-        font-size: clamp(32px, 9vw, 65px);
-        font-weight: 900;
-        margin-top: 15px;
-        letter-spacing: 2px;
-    }
-
-    .roborace {
-        margin-top: 20px;
-        font-size: clamp(20px, 5vw, 30px);
-        color: #90caf9;
-    }
-
-    .message {
-        margin-top: 35px;
-        font-size: 19px;
-        color: #eceff1;
-        line-height: 1.6;
-    }
-
-    .share {
-        margin-top: 25px;
-        background: #2196f3;
-        color: white;
-    }
-
-    .confetti {
-        position: fixed;
-        width: 9px;
-        height: 14px;
-        top: -20px;
-        animation: fall linear forwards;
-        z-index: 1;
-    }
-
-    @keyframes fall {
-        to {
-            transform: translateY(110vh) rotate(720deg);
+        .page {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            box-sizing: border-box;
         }
-    }
 
-    .winner {
-        margin-top: 30px;
-        font-size: 16px;
-        color: #90a4ae;
-    }
-</style>
+        .box {
+            width: 100%;
+            max-width: 650px;
+        }
+
+        .robot {
+            font-size: 80px;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            font-size: 32px;
+            margin: 10px 0;
+        }
+
+        p {
+            font-size: 20px;
+            color: #cbd5e1;
+        }
+
+        button {
+            margin-top: 25px;
+            padding: 16px 30px;
+            font-size: 18px;
+            font-weight: bold;
+            border: 0;
+            border-radius: 12px;
+            background: white;
+            color: #111827;
+            cursor: pointer;
+        }
+
+        button:active {
+            transform: scale(0.95);
+        }
+
+        #result {
+            display: none;
+        }
+
+        .number {
+            font-size: 110px;
+            font-weight: bold;
+            color: #f59e0b;
+            margin: 10px 0;
+        }
+
+        .prize {
+            font-size: 48px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .race {
+            font-size: 28px;
+            color: #38bdf8;
+            font-weight: bold;
+        }
+
+        .message {
+            margin-top: 30px;
+            font-size: 21px;
+            line-height: 1.5;
+            color: white;
+        }
+
+        .again {
+            background: #38bdf8;
+            color: black;
+        }
+    </style>
 </head>
 
 <body>
 
-<div class="container">
+<div class="page">
 
-    <div id="intro">
+    <div class="box" id="start">
+
         <div class="robot">🤖</div>
 
-        <div class="intro">
-            I have something to tell everyone...
-        </div>
+        <h1>I've got something to tell everyone...</h1>
 
-        <button onclick="revealWinner()">
-            TAP TO REVEAL
+        <p>After all the work, testing and racing...</p>
+
+        <button onclick="showResult()">
+            REVEAL THE RESULT
         </button>
+
     </div>
 
 
-    <div id="reveal" class="reveal">
+    <div class="box" id="result">
 
-        <div class="small">
-            THE RESULT IS IN...
-        </div>
+        <div class="robot">🤖</div>
 
-        <div class="third">
-            3rd
-        </div>
+        <p>THE RESULT IS...</p>
 
-        <div class="prize">
-            PRIZE! 🏆
-        </div>
+        <div class="number">3rd</div>
 
-        <div class="roborace">
-            🤖 ROBORACE 🤖
+        <div class="prize">PRIZE 🏆</div>
+
+        <div class="race">
+            ROBORACE
         </div>
 
         <div class="message">
-            After all the building, testing, fixing,
-            debugging and racing...
+            WE ACTUALLY DID IT! 🎉
             <br><br>
-
-            <strong>WE DID IT!</strong>
+            All that building, fixing, testing
+            and racing was worth it.
         </div>
 
-        <button class="share" onclick="shareResult()">
+        <button class="again" onclick="shareResult()">
             SHARE THE NEWS
         </button>
-
-        <div class="winner">
-            🏁 RoboRace 2026
-        </div>
 
     </div>
 
@@ -207,65 +154,34 @@
 
 <script>
 
-function revealWinner() {
+function showResult() {
 
-    document.getElementById("intro").style.display = "none";
-    document.getElementById("reveal").style.display = "block";
+    document.getElementById("start").style.display = "none";
 
-    launchConfetti();
-}
+    document.getElementById("result").style.display = "block";
 
-
-function launchConfetti() {
-
-    for (let i = 0; i < 120; i++) {
-
-        const piece = document.createElement("div");
-
-        piece.className = "confetti";
-
-        piece.style.left = Math.random() * 100 + "vw";
-
-        piece.style.animationDuration =
-            (2 + Math.random() * 4) + "s";
-
-        piece.style.animationDelay =
-            Math.random() * 1.5 + "s";
-
-        piece.style.transform =
-            `rotate(${Math.random() * 360}deg)`;
-
-        piece.style.background =
-            `hsl(${Math.random() * 360}, 90%, 60%)`;
-
-        document.body.appendChild(piece);
-
-        setTimeout(() => {
-            piece.remove();
-        }, 6500);
-    }
 }
 
 
 function shareResult() {
 
-    const text =
-        "🏆 I WON 3RD PRIZE IN ROBORACE! 🤖";
+    var message = "🏆 I WON 3RD PRIZE IN ROBORACE! 🤖";
 
     if (navigator.share) {
 
         navigator.share({
-            title: "Roborace Result",
-            text: text
+            title: "RoboRace Result",
+            text: message
         });
 
     } else {
 
-        navigator.clipboard.writeText(text);
+        navigator.clipboard.writeText(message);
 
-        alert("Result copied! Send it to everyone 🚀");
+        alert("Copied! Now send it to everyone 😎");
 
     }
+
 }
 
 </script>
